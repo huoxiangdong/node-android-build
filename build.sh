@@ -56,7 +56,8 @@ rm -rf "$zipname"
 
 type zip >/dev/null 2>&1
 if [ "x$?" == "x0" ]; then
-  cd "$outdir"
+  #cd "$outdir"
+  cd "$dir"
   zip -r -y "../$zipname" .
   cd ..
 else
