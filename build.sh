@@ -42,7 +42,7 @@ patch -p0 < ../android-configure.patch
 chmod +x ./android-configure
 cat ./android-configure
 ./android-configure "$ANDROID_HOME/ndk/$ndkver" "$arch" "$sdkver"
-make
+make -j8
 
 outdir="build"
 mkdir -p "../$outdir/lib"
