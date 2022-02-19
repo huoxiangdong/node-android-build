@@ -1,5 +1,14 @@
 --- ./android-configure	2021-05-11 20:06:24.000000000 +0800
 +++ ./android-configure2	2021-10-21 20:16:30.419112735 +0800
+@@ -49,7 +49,7 @@
+         ;;
+ esac
+
+-HOST_OS="linux"
++HOST_OS="darwin"
+ HOST_ARCH="x86_64"
+ export CC_host=$(command -v gcc)
+ export CXX_host=$(command -v g++)
 @@ -81,5 +81,7 @@
          --dest-os=android \
          --without-snapshot \
