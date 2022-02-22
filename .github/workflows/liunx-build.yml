@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      nodeVersion:
+        description: 'Node.js version'
+        required: true
+        default: '14.17.0'
+      ndkVersion:
+        description: 'NDK version'
+        required: true
+        default: '23.0.7599858'
+      arch:
+        description: 'Arch'
+        required: true
+        default: 'arm64'
+      sdkPlatform:
+        description: 'SDK platform'
+        required: true
+        default: '23'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build x64
+      run: |
+        chmod +x ./build.sh
+        ./build.sh "${{ github.event.inputs.nodeVersion }}" "${{ github.event.inputs.ndkVersion }}" "${{ github.event.inputs.arch }}" "${{ github.event.inputs.sdkPlatform }}"
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: libnode
+        path: |
+          ./build
+        if-no-files-found: ignore # 'warn' or 'ignore' are also available, defaults to `warn`
+        retention-days: 1
